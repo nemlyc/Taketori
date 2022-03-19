@@ -10,4 +10,9 @@
         Shine,
         Kaguya
     }
+    public enum BambooTag
+    {
+        Shinable,
+        Kaguyable
+    }
 }
