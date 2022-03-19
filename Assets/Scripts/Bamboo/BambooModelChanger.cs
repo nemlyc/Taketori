@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class BambooModelChanger : MonoBehaviour
 {
+    /*
+     * GeneratorからInitializeを呼び出し、モデルを切り替える。
+     */
+
     [SerializeField]
     GameObject NormalBamboo, ShinyBamboo, KaguyaBamboo;
-
-    readonly Vector3 BambooPosition = new Vector3(0, 10, 0);
 
     public void Initialize(BambooInfo.BambooType type)
     {
@@ -29,7 +31,7 @@ public class BambooModelChanger : MonoBehaviour
     void ChangeModelFromNormal(GameObject prefab)
     {
         NormalBamboo.SetActive(false);
-        Instantiate(prefab, BambooPosition, Quaternion.identity, transform);
+        Instantiate(prefab, transform.position, Quaternion.identity, transform);
     }
 
     private void Reset()
