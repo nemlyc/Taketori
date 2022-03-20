@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class Timer : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Timer : MonoBehaviour
     /// 現在の時間のfloatを返す。
     /// </summary>
     public float RawTime { get; private set; }
+
+    ReactiveProperty<bool> isTimeUp = new ReactiveProperty<bool>();
+    public IReadOnlyReactiveProperty<bool> IsTimeUp { get { return isTimeUp; } }
 
     float localTime;
     bool isCountDown = false;
@@ -71,6 +75,8 @@ public class Timer : MonoBehaviour
         isCountDown = true;
 
         isRunning = true;
+
+        isTimeUp.Value = false;
     }
 
     /// <summary>
@@ -122,6 +128,10 @@ public class Timer : MonoBehaviour
     void CountDown()
     {
         localTime -= Time.deltaTime;
+        if (localTime <= 0)
+        {
+            isTimeUp.Value = true;
+        }
     }
 
     private void Update()

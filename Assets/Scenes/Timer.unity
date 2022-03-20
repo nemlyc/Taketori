@@ -1231,7 +1231,7 @@ MonoBehaviour:
   countDownStart: {fileID: 661705205}
   StopButton: {fileID: 882100283}
   ResetButton: {fileID: 1118150137}
-  CountDownTime: 60
+  CountDownTime: 10
   timerText: {fileID: 1608835468}
   rawTime: {fileID: 832299731}
   result: {fileID: 1654714365}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UniRx;
 
 [RequireComponent(typeof(Timer))]
 public class SampleTimer : MonoBehaviour
@@ -38,6 +39,16 @@ public class SampleTimer : MonoBehaviour
         {
             timer.ResetTimer();
         });
+
+        timer.IsTimeUp.Subscribe(timeUp =>
+        {
+            if (timeUp)
+            {
+                timer.StopTimer();
+                result.text = "Time Up";
+            }
+            
+        }).AddTo(this);
     }
 
     private void Update()
