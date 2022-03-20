@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     /// <summary>
     /// 現在の時間をstringで返す。
     /// </summary>
-    public string CurrentTime { get; private set; }
+    public ReactiveProperty<string> currentTime { get; private set; } = new ReactiveProperty<string>();
 
     /// <summary>
     /// 現在の時間のfloatを返す。
@@ -49,7 +49,7 @@ public class Timer : MonoBehaviour
     public string StopAndReturnTimer()
     {
         isRunning = false;
-        return CurrentTime;
+        return currentTime.Value;
     }
 
     /// <summary>
@@ -131,6 +131,8 @@ public class Timer : MonoBehaviour
         if (localTime <= 0)
         {
             isTimeUp.Value = true;
+            StopTimer();
+            ResetTimer();
         }
     }
 
@@ -147,7 +149,7 @@ public class Timer : MonoBehaviour
                 CountUp();
             }
         }
-        CurrentTime = TimerFormat();
+        currentTime.Value = TimerFormat();
         RawTime = localTime;
     }
 

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UniRx;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int currentScore { get; set; }
+    public ReactiveProperty<int> currentScore = new ReactiveProperty<int>();
 
     ScoreEntity currentEntity;
 

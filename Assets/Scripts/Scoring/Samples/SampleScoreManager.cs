@@ -19,14 +19,14 @@ public class SampleScoreManager : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<GenericBamboo>(out var bamboo))
         {
-            var score = scoreManager.currentScore;
-            scoreManager.currentScore = bamboo.CalcScore(score);
+            var score = scoreManager.currentScore.Value;
+            scoreManager.currentScore.Value = bamboo.CalcScore(score);
 
             bamboo.AttackAction();
             var type = bamboo.GetBambooType();
             scoreManager.AddBamboo(type);
 
-            Debug.Log(scoreManager.currentScore);
+            Debug.Log(scoreManager.currentScore.Value);
         }
     }
 
