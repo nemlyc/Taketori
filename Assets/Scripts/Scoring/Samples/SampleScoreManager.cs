@@ -6,7 +6,7 @@ using UnityEngine;
 public class SampleScoreManager : MonoBehaviour
 {
     [SerializeField]
-    CorrectionItem[] items;
+    CollectionItem[] items;
 
     ScoreManager scoreManager;
 
