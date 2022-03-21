@@ -44,7 +44,7 @@ public class SampleScoreManager : MonoBehaviour
             {
                 IsGot = true
             };
-            entity.SetID(item.GetID());
+            entity.ID = item.GetID();
 
             scoreManager.AddItem(entity);
         }
