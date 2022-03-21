@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UniRx;
 using UnityEngine.SceneManagement;
+using System;
 
 public class HomeView : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class HomeView : MonoBehaviour
 
     [SerializeField]
     Button startButton;
+
+    [SerializeField]
+    CanvasFader fader;
+
+    readonly float fadeTime = 0.5f;
 
     public void UpdateScore(int score)
     {
@@ -40,12 +46,24 @@ public class HomeView : MonoBehaviour
         dateValue.text = $"（{date}）";
     }
 
+    
+
     private void Start()
     {
         startButton.OnClickAsObservable().Subscribe(_ =>
         {
-            SceneManager.LoadSceneAsync(ViewInfo.InGameView);
+            fader.DoFadeOut(fadeTime);
+            var a = SceneManager.LoadSceneAsync(ViewInfo.InGameView);
+            a.allowSceneActivation = false;
+
+            Observable.Timer(TimeSpan.FromSeconds(fadeTime))
+                .Subscribe(_ => ExecuteSceneChange(a));
         }).AddTo(this);
+    }
+
+    void ExecuteSceneChange(AsyncOperation a)
+    {
+        a.allowSceneActivation = true;
     }
 
     string AppendPresetText(int num, string presetText)

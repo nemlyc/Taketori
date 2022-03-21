@@ -8,7 +8,10 @@ public class InGameView : MonoBehaviour
 {
     [SerializeField]
     TMP_Text ageValue, scoreValue, timerValue;
+    [SerializeField]
+    CanvasFader fader;
 
+    readonly float fadeTime = 0.5f;
     //GameViewPresenter presenter;
 
     public void UpdateAgeValue(int age)
@@ -24,5 +27,10 @@ public class InGameView : MonoBehaviour
     public void UpdateTimerValue(string time)
     {
         timerValue.text = time;
+    }
+
+    private void Start()
+    {
+        fader.DoFadeIn(fadeTime);
     }
 }
