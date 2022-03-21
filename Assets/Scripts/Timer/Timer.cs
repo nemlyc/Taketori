@@ -69,7 +69,7 @@ public class Timer : MonoBehaviour
     /// カウントダウンタイマーを開始する
     /// </summary>
     /// <param name="startTime">開始する時間</param>
-    public void StartTimer(int startTime)
+    public void StartTimer(float startTime)
     {
         localTime = startTime;
         isCountDown = true;
