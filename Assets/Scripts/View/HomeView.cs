@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UniRx;
+using UnityEngine.SceneManagement;
 
 public class HomeView : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class HomeView : MonoBehaviour
     TMP_Text scoreValue, normalNum, shineNum, kaguyaNum;
     [SerializeField]
     TMP_Text rateValue;
+    [SerializeField]
+    TMP_Text dateValue;
 
     [SerializeField]
     Button startButton;
@@ -20,19 +23,11 @@ public class HomeView : MonoBehaviour
         scoreValue.text = score.ToString();
     }
 
-    public void UpdateNormalNum(int num)
+    public void UpdateBambooNums(ScoreEntity scoreEntity)
     {
-        normalNum.text = AppendPresetText(num, PresetText.Hon);
-    }
-
-    public void UpdateShineNum(int num)
-    {
-        shineNum.text = AppendPresetText(num, PresetText.Hon);
-    }
-
-    public void UpdateKaguyaNum(int num)
-    {
-        kaguyaNum.text = AppendPresetText(num, PresetText.Hon);
+        normalNum.text = AppendPresetText(scoreEntity.NormalNum, PresetText.Hon);
+        shineNum.text = AppendPresetText(scoreEntity.ShineNum, PresetText.Hon);
+        kaguyaNum.text = AppendPresetText(scoreEntity.KaguyaNum, PresetText.Hon);
     }
 
     public void UpdateRateValue(int rate)
@@ -40,11 +35,16 @@ public class HomeView : MonoBehaviour
         rateValue.text = AppendPresetText(rate, PresetText.Percent);
     }
 
+    public void UpdateDate(string date)
+    {
+        dateValue.text = $"（{date}）";
+    }
+
     private void Start()
     {
         startButton.OnClickAsObservable().Subscribe(_ =>
         {
-            // to InGameScene
+            SceneManager.LoadSceneAsync(ViewInfo.InGameView);
         }).AddTo(this);
     }
 
@@ -60,6 +60,7 @@ public class HomeView : MonoBehaviour
         shineNum = GameObject.Find("Shine Num").GetComponent<TMP_Text>();
         kaguyaNum = GameObject.Find("Kaguya Num").GetComponent<TMP_Text>();
         rateValue = GameObject.Find("Rate Value").GetComponent<TMP_Text>();
+        dateValue = GameObject.Find("Date Value").GetComponent<TMP_Text>();
         startButton = GameObject.Find("Start Button").GetComponent<Button>();
     }
 }

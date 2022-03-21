@@ -28,6 +28,9 @@ public class InGameViewPresenter : MonoBehaviour
 
     private void Start()
     {
+        // WIP
+        timer.StartTimer(300);
+
         timer.currentTime.Subscribe(time =>
         {
             gameView.UpdateTimerValue(time);
@@ -35,7 +38,10 @@ public class InGameViewPresenter : MonoBehaviour
 
         timer.IsTimeUp.Subscribe(timeUp =>
         {
-            Debug.Log("タイムアップ！ wip");
+            if (timeUp)
+            {
+                Debug.Log("タイムアップ！ wip");
+            }
         }).AddTo(this);
 
         score.currentScore.Subscribe(score =>

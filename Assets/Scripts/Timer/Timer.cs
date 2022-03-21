@@ -128,7 +128,7 @@ public class Timer : MonoBehaviour
     void CountDown()
     {
         localTime -= Time.deltaTime;
-        if (localTime <= 0)
+        if (localTime < 0)
         {
             isTimeUp.Value = true;
             StopTimer();

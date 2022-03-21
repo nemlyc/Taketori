@@ -1395,9 +1395,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebe341a6f039eb47ad80159e568b7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: {fileID: 0}
-  timer: {fileID: 0}
-  gameView: {fileID: 0}
+  score: {fileID: 1637963719}
+  timer: {fileID: 572498789}
+  gameView: {fileID: 1406358237}
 --- !u!1 &1197376751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,12 +1702,12 @@ GameObject:
   - component: {fileID: 1637963718}
   - component: {fileID: 1637963719}
   m_Layer: 0
-  m_Name: Score Manager
+  m_Name: Score Manager (Player)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1637963718
 Transform:
   m_ObjectHideFlags: 0
