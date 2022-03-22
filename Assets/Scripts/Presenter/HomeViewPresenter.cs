@@ -28,17 +28,9 @@ public class HomeViewPresenter : MonoBehaviour
     {
         if (PlayerDataManager.LoadScoreData(out var score))
         {
-            homeView.UpdateScore(CalcScore(score));
+            homeView.UpdateScore(score.Score);
             homeView.UpdateBambooNums(score);
             homeView.UpdateDate(score.Date.ToString());
         }
-    }
-
-    int CalcScore(ScoreEntity score)
-    {
-        var result = ((score.NormalNum * BambooInfo.NormalScore) +
-            (score.ShineNum * BambooInfo.ShinyScore)) * score.KaguyaNum * BambooInfo.KaguyaScoreMagnification;
-
-        return result;
     }
 }
