@@ -25,13 +25,37 @@ public class InGameViewPresenter : MonoBehaviour
     Timer timer;
     [SerializeField]
     InGameView gameView;
+    [SerializeField]
+    BambooGenerator bambooGenerator;
 
     private void Start()
     {
         GameInitialize();
-
-        // WIP
-        timer.StartTimer(300);
+        
+        #region ゲームが始まるまでをカウントダウンするObservable
+        Timer localTimer = gameObject.AddComponent<Timer>();
+        localTimer.StartTimer(4);
+        localTimer.currentTime.Subscribe(time =>
+        {
+            if (time != null)
+            {
+                gameView.UpdateReadyTimeValue(time.Substring(3, 1));
+            }
+        }).AddTo(this);
+        localTimer.IsTimeUp.Subscribe(timeUp =>
+        {
+            if (timeUp)
+            {
+                gameView.ToggleReadyTime(false);
+                timer.StartTimer(300);
+                Destroy(localTimer);
+            }
+            else
+            {
+                gameView.ToggleReadyTime(true);
+            }
+        }).AddTo(this);
+        #endregion
 
         timer.currentTime.Subscribe(time =>
         {
@@ -59,10 +83,11 @@ public class InGameViewPresenter : MonoBehaviour
     void GameInitialize()
     {
         /*
-         * 非同期にして待つ予定。
          * - 竹の切り替え
          * - 月の配置
          */
+        // bambooGenerator.PlacementBamboo();
+
     }
 
     void InProgressGame()
@@ -83,6 +108,7 @@ public class InGameViewPresenter : MonoBehaviour
     }
 
     #region LocalMethod
+
     void SaveHighScore(ScoreEntity thisScore)
     {
         var isExist = PlayerDataManager.LoadScoreData(out var scoreEntity);
