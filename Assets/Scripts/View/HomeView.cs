@@ -57,7 +57,7 @@ public class HomeView : MonoBehaviour
             a.allowSceneActivation = false;
 
             Observable.Timer(TimeSpan.FromSeconds(fadeTime))
-                .Subscribe(_ => ExecuteSceneChange(a));
+                .Subscribe(_ => ExecuteSceneChange(a)).AddTo(this);
         }).AddTo(this);
     }
 
