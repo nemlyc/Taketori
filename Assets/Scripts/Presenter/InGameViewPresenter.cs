@@ -27,6 +27,8 @@ public class InGameViewPresenter : MonoBehaviour
     InGameView gameView;
     [SerializeField]
     BambooGenerator bambooGenerator;
+    [SerializeField]
+    float readyTime = 4, ingameTime = 300;
 
     private void Start()
     {
@@ -34,7 +36,7 @@ public class InGameViewPresenter : MonoBehaviour
         
         #region ゲームが始まるまでをカウントダウンするObservable
         Timer localTimer = gameObject.AddComponent<Timer>();
-        localTimer.StartTimer(4);
+        localTimer.StartTimer(readyTime);
         localTimer.currentTime.Subscribe(time =>
         {
             if (time != null)
@@ -47,7 +49,7 @@ public class InGameViewPresenter : MonoBehaviour
             if (timeUp)
             {
                 gameView.ToggleReadyTime(false);
-                timer.StartTimer(300);
+                timer.StartTimer(ingameTime);
                 Destroy(localTimer);
             }
             else
@@ -66,7 +68,7 @@ public class InGameViewPresenter : MonoBehaviour
         {
             if (timeUp)
             {
-                FinishedGame();//これ、Startでタイマースタートしなかったときどうなる？
+                FinishedGame();
             }
             else
             {
