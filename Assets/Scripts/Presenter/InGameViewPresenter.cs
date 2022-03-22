@@ -28,6 +28,8 @@ public class InGameViewPresenter : MonoBehaviour
 
     private void Start()
     {
+        GameInitialize();
+
         // WIP
         timer.StartTimer(300);
 
@@ -40,7 +42,11 @@ public class InGameViewPresenter : MonoBehaviour
         {
             if (timeUp)
             {
-                Debug.Log("タイムアップ！ wip");
+                FinishedGame();//これ、Startでタイマースタートしなかったときどうなる？
+            }
+            else
+            {
+                InProgressGame();
             }
         }).AddTo(this);
 
@@ -49,4 +55,41 @@ public class InGameViewPresenter : MonoBehaviour
             gameView.UpdateScoreValue(score);
         }).AddTo(this);
     }
+
+    void GameInitialize()
+    {
+        /*
+         * 非同期にして待つ予定。
+         * - 竹の切り替え
+         * - 月の配置
+         */
+    }
+
+    void InProgressGame()
+    {
+        CursorManager.OffCursor();
+        Time.timeScale = 1;
+    }
+
+    void FinishedGame()
+    {
+        Debug.Log("Game Stop");
+        CursorManager.OnCursor();
+        Time.timeScale = 0;
+
+        SaveHighScore(score.currentEntity);
+
+        // Todo: Show Result Window
+    }
+
+    #region LocalMethod
+    void SaveHighScore(ScoreEntity thisScore)
+    {
+        var isExist = PlayerDataManager.LoadScoreData(out var scoreEntity);
+        if (!isExist || thisScore.Score > scoreEntity.Score)
+        {
+            PlayerDataManager.WriteScoreData(thisScore);
+        }
+    }
+    #endregion
 }
