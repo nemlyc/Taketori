@@ -6,11 +6,11 @@ using System;
 [Serializable]
 public class ItemEntity
 {
-    public string ID { get; private set; }
+    public string ID { get; set; }
     public bool IsGot { get; set; }
 
-    public void SetID(string id)
+    public override string ToString()
     {
-        this.ID = id;
+        return $"[{ID}] : IsGot [{IsGot}]";
     }
 }

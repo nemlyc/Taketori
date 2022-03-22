@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "ScriptableObject/CorrectionItem")]
-public class CorrectionItem : ScriptableObject
+[CreateAssetMenu(menuName = "ScriptableObject/CollectionItem")]
+public class CollectionItem : ScriptableObject
 {
     [SerializeField]
     private string ID;
@@ -20,7 +20,7 @@ public class CorrectionItem : ScriptableObject
         return sprite;
     }
 
-    public CorrectionItem()
+    public CollectionItem()
     {
         ID = System.Guid.NewGuid().ToString();
     }

@@ -53,7 +53,7 @@ public class SampleTimer : MonoBehaviour
 
     private void Update()
     {
-        timerText.text = timer.CurrentTime;
+        timerText.text = timer.currentTime.Value;
         rawTime.text = timer.RawTime.ToString();
     }
 }

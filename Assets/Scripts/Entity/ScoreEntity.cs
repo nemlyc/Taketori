@@ -6,6 +6,7 @@ using System.Text;
 public class ScoreEntity
 {
     public DateTime Date { get; set; }
+    public int Score { get; set; }
     public int NormalNum { get; set; }
     public int ShineNum { get; set; }
     public int KaguyaNum { get; set; }

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UniRx;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int currentScore { get; set; }
+    public ReactiveProperty<int> currentScore = new ReactiveProperty<int>();
 
-    ScoreEntity currentEntity;
+    public ScoreEntity currentEntity { get; private set; }
 
     public void AddBamboo(BambooInfo.BambooType type)
     {
@@ -30,6 +31,8 @@ public class ScoreManager : MonoBehaviour
                 currentEntity.KaguyaNum += 1;
                 break;
         }
+
+        currentScore.Value = CalcScore();
     }
     public void AddItem(ItemEntity item)
     {
@@ -68,5 +71,24 @@ public class ScoreManager : MonoBehaviour
     {
         status = "未実装";
         return true;
-    }    
+    }
+
+    int CalcScore()
+    {
+        var result = ((currentEntity.NormalNum * BambooInfo.NormalScore) +
+            (currentEntity.ShineNum * BambooInfo.ShinyScore)) * currentEntity.KaguyaNum * BambooInfo.KaguyaScoreMagnification;
+
+        return result;
+    }
+
+    private void Start()
+    {
+        // 生成タイミング
+        currentEntity = new ScoreEntity();
+
+        currentScore.Subscribe(score =>
+        {
+            currentEntity.Score = score;
+        }).AddTo(this);
+    }
 }
