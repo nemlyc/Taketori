@@ -14,11 +14,18 @@ public class BambooGenerator : MonoBehaviour
     [SerializeField]
     readonly int ShinableNum = 5, KaguyaNum = 1;
 
+    GameObject kaguyaPosition;
+
     public void PlacementBamboo()
     {
         var shinableBamboos = GameObject.FindGameObjectsWithTag(BambooInfo.BambooTag.Shinable.ToString());
 
         AssignAnyBamboo(shinableBamboos);
+    }
+
+    public Transform GetKaguyaPosition()
+    {
+        return kaguyaPosition.transform;
     }
 
     void AssignShinyBamboo(GameObject[] shinables)
@@ -59,8 +66,9 @@ public class BambooGenerator : MonoBehaviour
         {
             kaguyaPicks = PickUp(shinables.Length, KaguyaNum).ToList();
         }
-
         InitializeBamboos(shinables, kaguyaPicks, BambooInfo.BambooType.Kaguya);
+
+        kaguyaPosition = shinables[kaguyaPicks[0]].gameObject;
     }
 
     void InitializeBamboos(GameObject[] bamboos, List<int> selected, BambooInfo.BambooType type)
