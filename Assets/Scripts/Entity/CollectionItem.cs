@@ -8,16 +8,13 @@ public class CollectionItem : ScriptableObject
     [SerializeField]
     private string ID;
     [SerializeField]
-    private Sprite sprite;
+    public string itemName;
+    [SerializeField]
+    public Sprite sprite;
 
     public string GetID()
     {
         return ID;
-    }
-
-    public Sprite GetSprite()
-    {
-        return sprite;
     }
 
     public CollectionItem()
