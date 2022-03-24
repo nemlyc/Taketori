@@ -6,6 +6,7 @@ using TMPro;
 using UniRx;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
 
 public class HomeView : MonoBehaviour
 {
@@ -17,10 +18,25 @@ public class HomeView : MonoBehaviour
     TMP_Text dateValue;
 
     [SerializeField]
-    Button startButton;
+    Button startButton, collectionButton;
 
     [SerializeField]
     CanvasFader fader;
+
+    [SerializeField]
+    CollectionView collectionView;
+
+    [SerializeField]
+    GameObject gotItemRoot;
+
+    [SerializeField]
+    GameObject collectionItemPrefab;
+
+    [SerializeField]
+    HomeViewPresenter presenter;
+
+    [SerializeField]
+    CollectionItemViewComponent[] itemList;
 
     readonly float fadeTime = 0.5f;
 
@@ -46,7 +62,24 @@ public class HomeView : MonoBehaviour
         dateValue.text = $"（{date}）";
     }
 
-    
+    public void PlacementGotItem(List<ItemEntity> items)
+    {
+        var map = presenter.GetItemMap();
+
+        foreach (var itemEntity in items)
+        {
+            var go = Instantiate(collectionItemPrefab, gotItemRoot.transform);
+            go.GetComponent<CollectionResultComponent>().SetImage(map[itemEntity.ID].sprite);
+        }
+    }
+
+    public void UpdateStatus(ItemEntity entity)
+    {
+        var list = itemList.ToList();
+
+        var item = list.Find(x => x.ID.Equals(entity.ID));
+        item.UpdateStatus(entity.ID, entity.IsGot);        
+    }
 
     private void Start()
     {
@@ -58,6 +91,11 @@ public class HomeView : MonoBehaviour
 
             Observable.Timer(TimeSpan.FromSeconds(fadeTime))
                 .Subscribe(_ => ExecuteSceneChange(a)).AddTo(this);
+        }).AddTo(this);
+
+        collectionButton.OnClickAsObservable().Subscribe(_ =>
+        {
+            collectionView.ShowCollectionCanvas(true);
         }).AddTo(this);
     }
 
