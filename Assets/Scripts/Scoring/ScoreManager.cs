@@ -83,9 +83,6 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        // 生成タイミング
-        currentEntity = new ScoreEntity();
-
         currentScore.Subscribe(score =>
         {
             currentEntity.Score = score;

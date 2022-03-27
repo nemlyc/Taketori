@@ -36,7 +36,7 @@ public class HomeView : MonoBehaviour
     HomeViewPresenter presenter;
 
     [SerializeField]
-    CollectionItemViewComponent[] itemList;
+    List<CollectionItemViewComponent> itemList;
 
     readonly float fadeTime = 0.5f;
 
@@ -75,10 +75,15 @@ public class HomeView : MonoBehaviour
 
     public void UpdateStatus(ItemEntity entity)
     {
-        var list = itemList.ToList();
-
-        var item = list.Find(x => x.ID.Equals(entity.ID));
-        item.UpdateStatus(entity.ID, entity.IsGot);        
+        var item = itemList.Find(x => x.gameObject.name.Equals(entity.ID));
+        if (item)
+        {
+            item.UpdateStatus(entity.ID, entity.IsGot);
+        }
+        else
+        {
+            Debug.Log("key not match. (データか何かでitem keyが変わってしまっている可能性があります。)");
+        }
     }
 
     private void Start()

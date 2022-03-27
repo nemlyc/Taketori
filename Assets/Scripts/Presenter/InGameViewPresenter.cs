@@ -32,6 +32,12 @@ public class InGameViewPresenter : MonoBehaviour
     [SerializeField]
     float readyTime = 4, ingameTime = 300;
 
+    [SerializeField]
+    ResultViewPresenter resultViewPresenter;
+
+    [SerializeField]
+    CollectionItem[] testItem;
+
     private void Start()
     {
         GameInitialize();
@@ -81,6 +87,7 @@ public class InGameViewPresenter : MonoBehaviour
         score.currentScore.Subscribe(score =>
         {
             gameView.UpdateScoreValue(score);
+
         }).AddTo(this);
 
         player.currentAge.Subscribe(age =>
@@ -112,8 +119,9 @@ public class InGameViewPresenter : MonoBehaviour
         Time.timeScale = 0;
 
         SaveHighScore(score.currentEntity);
+        SaveItemProgress(score.currentEntity.itemEntities);
 
-        // Todo: Show Result Window
+        resultViewPresenter.ShowResultView(true);
     }
 
     #region LocalMethod
@@ -126,5 +134,25 @@ public class InGameViewPresenter : MonoBehaviour
             PlayerDataManager.WriteScoreData(thisScore);
         }
     }
+    void SaveItemProgress(List<ItemEntity> items)
+    {
+        PlayerDataManager.WriteProgressData(items);
+    }
     #endregion
+
+    void TestScore()
+    {
+        score.AddBamboo(BambooInfo.BambooType.Normal);
+        score.AddBamboo(BambooInfo.BambooType.Normal);
+        score.AddBamboo(BambooInfo.BambooType.Shine);
+        score.AddBamboo(BambooInfo.BambooType.Normal);
+        score.AddBamboo(BambooInfo.BambooType.Kaguya);
+        foreach (var i in testItem)
+        {
+            var ent = new ItemEntity();
+            ent.ID = i.GetID();
+            ent.IsGot = true;
+            score.AddItem(ent);
+        }
+    }
 }
