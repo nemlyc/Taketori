@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10.0f;
     public float gravity = 9.81f;
-    public float age, preage = 1000;
+    public float preage = 1000;
+    public ReactiveProperty<float> currentAge = new ReactiveProperty<float>();
     public Transform attackPoint;
     public float attackRadius;
     public LayerMask bamboolayer;
@@ -16,13 +17,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     public GameObject[] specilattackpoints;
     private int equipment;
+    private ScoreManager scoremanager;
 
     CharacterController controller;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentAge.Value = preage;
         controller = GetComponent<CharacterController>();
+        scoremanager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         equipment = 0;
         foreach(GameObject specilattackpoint in specilattackpoints)
         {
@@ -50,16 +54,18 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(speed < 30) speed = preage - age + speed;
-        // Age();
+        if(speed < 30) speed = preage - currentAge.Value + speed;
+        Age();
     }
-    // void Age()
-    // {
-    //     if (age > 20)
-    //     {
-    //         age -= hoge / 10;
-    //     }
-    // }
+
+    void Age()
+    {
+        if (currentAge.Value > 20)
+        {
+            int sumbamboo = scoremanager.currentEntity.KaguyaNum + scoremanager.currentEntity.NormalNum + scoremanager.currentEntity.ShineNum;
+            currentAge.Value -= sumbamboo / 10;
+        }
+    }
 
     void Movement()
     {

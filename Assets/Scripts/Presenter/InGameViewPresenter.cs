@@ -24,6 +24,8 @@ public class InGameViewPresenter : MonoBehaviour
     [SerializeField]
     Timer timer;
     [SerializeField]
+    PlayerController player;
+    [SerializeField]
     InGameView gameView;
     [SerializeField]
     BambooGenerator bambooGenerator;
@@ -85,7 +87,13 @@ public class InGameViewPresenter : MonoBehaviour
         score.currentScore.Subscribe(score =>
         {
             gameView.UpdateScoreValue(score);
-        }).AddTo(this);      
+
+        }).AddTo(this);
+
+        player.currentAge.Subscribe(age =>
+        {
+            gameView.UpdateAgeValue(Mathf.FloorToInt(age));
+        }).AddTo(this);
     }
 
     void GameInitialize()
