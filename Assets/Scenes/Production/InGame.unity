@@ -2961,7 +2961,7 @@ MonoBehaviour:
   gameView: {fileID: 1406358237}
   bambooGenerator: {fileID: 883199850}
   readyTime: 4
-  ingameTime: 3
+  ingameTime: 300
   resultViewPresenter: {fileID: 1051698352}
   testItem:
   - {fileID: 11400000, guid: 299483962adbd024894d0283f18e0770, type: 2}
