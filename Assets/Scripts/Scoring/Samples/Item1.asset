@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Item1
   m_EditorClassIdentifier: 
   ID: 634bb7a4-67b6-4688-8a90-4e15063f75d4
+  itemName: "\u30A2\u30A4\u30C6\u30E01"
   sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

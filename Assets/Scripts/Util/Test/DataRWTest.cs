@@ -22,7 +22,8 @@ public class DataRWTest : MonoBehaviour
             NormalNum = 11,
             ShineNum = 5,
             KaguyaNum = 1,
-            itemEntities = items
+            itemEntities = items,
+            Score = 123456789
         };
 
         PlayerDataManager.WriteProgressData(items);
