@@ -39,9 +39,36 @@ public static class PlayerDataManager
         }
     }
 
-    public static void WriteProgressData(List<ItemEntity> items)
+    public static void WriteProgressData(List<ItemEntity> newProgress)
     {
-        var json = JsonManager.GenerateJsonObject<List<ItemEntity>>(items);
+        LoadProgressData(out var currentProgress);
+
+        var progressDictionary = new Dictionary<string, bool>();
+        foreach (var item in currentProgress)
+        {
+            progressDictionary.Add(item.ID, item.IsGot);
+        }
+
+        foreach (var entity in newProgress)
+        {
+            if (progressDictionary.TryGetValue(entity.ID, out var isGot) && !isGot)
+            {
+                progressDictionary[entity.ID] = true;
+            }
+        }
+
+        var newList = new List<ItemEntity>();
+        foreach (var id in progressDictionary.Keys)
+        {
+            var entity = new ItemEntity()
+            {
+                ID = id,
+                IsGot = progressDictionary[id]
+            };
+            newList.Add(entity);
+        }
+
+        var json = JsonManager.GenerateJsonObject<List<ItemEntity>>(newList);
         JsonManager.WriteJsonData(ProgressDataPath, json);
     }
 
