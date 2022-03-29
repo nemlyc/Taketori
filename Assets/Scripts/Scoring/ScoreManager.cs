@@ -10,13 +10,13 @@ public class ScoreManager : MonoBehaviour
 
     public ScoreEntity currentEntity { get; private set; }
 
+    public void Init()
+    {
+        currentEntity = new ScoreEntity();
+    }
+
     public void AddBamboo(BambooInfo.BambooType type)
     {
-        if (currentEntity == null)
-        {
-            currentEntity = new ScoreEntity();
-        }
-
         switch (type)
         {
             case BambooInfo.BambooType.Normal:
@@ -36,11 +36,6 @@ public class ScoreManager : MonoBehaviour
     }
     public void AddItem(ItemEntity item)
     {
-        if (currentEntity == null)
-        {
-            currentEntity = new ScoreEntity();
-        }
-
         currentEntity.itemEntities.Add(item);
     }
 
@@ -75,8 +70,11 @@ public class ScoreManager : MonoBehaviour
 
     int CalcScore()
     {
-        var result = ((currentEntity.NormalNum * BambooInfo.NormalScore) +
-            (currentEntity.ShineNum * BambooInfo.ShinyScore)) * currentEntity.KaguyaNum * BambooInfo.KaguyaScoreMagnification;
+        var result = ((currentEntity.NormalNum * BambooInfo.NormalScore) + (currentEntity.ShineNum * BambooInfo.ShinyScore));
+        if (currentEntity.KaguyaNum > 0)
+        {
+            result *= currentEntity.KaguyaNum * BambooInfo.KaguyaScoreMagnification;
+        }
 
         return result;
     }

@@ -6,8 +6,6 @@ using UniRx;
 public class InGameViewPresenter : MonoBehaviour
 {
     /*
-     * Todo : Age
-     * 
      * 購読する
      *  - Timer
      *  - Age
@@ -30,6 +28,8 @@ public class InGameViewPresenter : MonoBehaviour
     [SerializeField]
     BambooGenerator bambooGenerator;
     [SerializeField]
+    ItemManager item;
+    [SerializeField]
     float readyTime = 4, ingameTime = 300;
 
     [SerializeField]
@@ -37,6 +37,23 @@ public class InGameViewPresenter : MonoBehaviour
 
     [SerializeField]
     CollectionItem[] testItem;
+
+    public bool PickUpItem(out ItemEntity entity)
+    {
+        var index = item.PickUp();
+        if (index != -1)
+        {
+            entity = item.GetItem(index);
+
+            return true;
+        }
+        else
+        {
+            entity = new ItemEntity();
+
+            return false;
+        }
+    }
 
     private void Start()
     {
@@ -103,7 +120,8 @@ public class InGameViewPresenter : MonoBehaviour
          * - 月の配置
          */
         // bambooGenerator.PlacementBamboo();
-
+        item.CreateItemMap();
+        score.Init();
     }
 
     void InProgressGame()

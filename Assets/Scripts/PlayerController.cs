@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -6,6 +6,9 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    InGameViewPresenter presenter;
+
     public float speed = 10.0f;
     public float gravity = 9.81f;
     public float preage = 1000;
@@ -17,16 +20,29 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     public GameObject[] specilattackpoints;
     private int equipment;
+    [SerializeField]
     private ScoreManager scoremanager;
+
+    Transform mainCamera;
 
     CharacterController controller;
 
-    // Start is called before the first frame update
+    public void AttackBambooLogic(GenericBamboo hitBamboo)
+    {
+        scoremanager.AddBamboo(hitBamboo.GetBambooType());
+
+        var isGot = presenter.PickUpItem(out var itemEntity);
+        if (isGot)
+        {
+            scoremanager.AddItem(itemEntity);
+        }
+        hitBamboo.AttackAction();
+    }
+
     void Start()
     {
         currentAge.Value = preage;
         controller = GetComponent<CharacterController>();
-        scoremanager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         equipment = 0;
         foreach(GameObject specilattackpoint in specilattackpoints)
         {
@@ -40,6 +56,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Movement();
+        LookForward();
+
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             ChangeSpecialAttack();
@@ -47,7 +65,8 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Attack();
-        }else if(Input.GetMouseButtonDown(1))
+        }
+        else if(Input.GetMouseButtonDown(1))
         {
             SpecialAttack();
         }
@@ -63,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (currentAge.Value > 20)
         {
             int sumbamboo = scoremanager.currentEntity.KaguyaNum + scoremanager.currentEntity.NormalNum + scoremanager.currentEntity.ShineNum;
-            currentAge.Value -= sumbamboo / 10;
+            currentAge.Value = preage - sumbamboo / 10;
         }
     }
 
@@ -79,12 +98,26 @@ public class PlayerController : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
     }
+    void LookForward()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main.transform;
+        }
+        var camRot = mainCamera.rotation.eulerAngles;
+        var cameraYaw = new Vector3(0, camRot.y, 0);
+        transform.localEulerAngles = cameraYaw;
+    }
+
     void Attack()
     {
         Collider[] hitBamboos = Physics.OverlapSphere(attackPoint.position, attackRadius, bamboolayer);
         foreach(Collider hitBamboo in hitBamboos)
         {
-            Debug.Log("攻撃");
+            if (hitBamboo.TryGetComponent<GenericBamboo>(out var genericBamboo))
+            {
+                AttackBambooLogic(genericBamboo);
+            }
         }
     }
 
