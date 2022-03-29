@@ -74,6 +74,8 @@ public static class PlayerDataManager
 
     public static void WriteScoreData(ScoreEntity entity)
     {
+        entity.Date = System.DateTime.Now;
+
         var json = JsonManager.GenerateJsonObject<ScoreEntity>(entity);
         JsonManager.WriteJsonData(ScoreDataPath, json);
     }

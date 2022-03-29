@@ -11,7 +11,8 @@ public abstract class GenericBamboo : MonoBehaviour, IBamboo
          * -> Animation
          * -> Destroy
          */
-        Debug.Log($"Hit [{gameObject.name.Substring(12)}]");
+        //Debug.Log($"Hit [{gameObject.name.Substring(12)}]");
+        Debug.Log($"Hit [{gameObject.name}]");
     }
 
     public abstract int CalcScore(int current);
