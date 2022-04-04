@@ -27,7 +27,7 @@ public class KaguyaBamboo : GenericBamboo
                 presenter.GameClearEvent.Invoke();
 
                 Destroy(transform.parent.gameObject);
-            });
+            }).AddTo(this);
     }
 
     public override int CalcScore(int current)

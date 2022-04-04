@@ -23,7 +23,7 @@ public abstract class GenericBamboo : MonoBehaviour, IBamboo
             .Subscribe(_ =>
             {
                 Destroy(transform.parent.gameObject);
-            });
+            }).AddTo(this);
     }
 
     public abstract int CalcScore(int current);
