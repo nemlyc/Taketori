@@ -66,7 +66,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2425186116495708694, guid: 2615cc4e5859db1418a8fc854b8a0156, type: 3}
       propertyPath: m_Name
-      value: Normal Bamboo
+      value: Normal Bamboo 2
       objectReference: {fileID: 0}
     - target: {fileID: 2425186116495708695, guid: 2615cc4e5859db1418a8fc854b8a0156, type: 3}
       propertyPath: m_RootOrder
@@ -124,6 +124,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2425186116495708695, guid: 2615cc4e5859db1418a8fc854b8a0156, type: 3}
   m_PrefabInstance: {fileID: 7352027908990134067}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &462012127070474130
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161225788178232613}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a120547725760c4896267ff72b91a12, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &-8801127211848653537
 MonoBehaviour:
   m_ObjectHideFlags: 0
