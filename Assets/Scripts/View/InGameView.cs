@@ -10,6 +10,10 @@ public class InGameView : MonoBehaviour
     TMP_Text ageValue, scoreValue, timerValue, readyTimeValue;
     [SerializeField]
     CanvasFader fader;
+    [SerializeField]
+    GameObject statusCanvas;
+    [SerializeField]
+    ParticleSystem clearParticle;
 
     readonly float fadeTime = 0.5f;
     //GameViewPresenter presenter;
@@ -34,9 +38,19 @@ public class InGameView : MonoBehaviour
         readyTimeValue.text = time;
     }
 
+    public void PlayParticle()
+    {
+        clearParticle.Play();
+    }
+
     public void ToggleReadyTime(bool isVisible)
     {
         readyTimeValue.gameObject.SetActive(isVisible);
+    }
+
+    public void SetView(bool isVisible)
+    {
+        statusCanvas.SetActive(isVisible);
     }
 
     private void Start()
