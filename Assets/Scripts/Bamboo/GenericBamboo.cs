@@ -1,9 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public abstract class GenericBamboo : MonoBehaviour, IBamboo
 {
+    readonly float DelayTime = 1000f;
+
     public virtual void AttackAction()
     {
         /*
@@ -11,8 +16,14 @@ public abstract class GenericBamboo : MonoBehaviour, IBamboo
          * -> Animation
          * -> Destroy
          */
-        //Debug.Log($"Hit [{gameObject.name.Substring(12)}]");
-        Debug.Log($"Hit [{gameObject.name}]");
+        var animator = GetComponent<Animator>();
+        animator.SetTrigger("Break");
+
+        Observable.Timer(TimeSpan.FromMilliseconds(DelayTime))
+            .Subscribe(_ =>
+            {
+                Destroy(transform.parent.gameObject);
+            }).AddTo(this);
     }
 
     public abstract int CalcScore(int current);

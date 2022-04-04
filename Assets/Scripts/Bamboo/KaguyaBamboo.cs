@@ -1,12 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class KaguyaBamboo : GenericBamboo
 {
+    readonly float DelayTime = 1500;
+
+    InGameViewPresenter presenter;
+    private void Awake()
+    {
+        presenter = FindObjectOfType<InGameViewPresenter>();
+    }
+
     public override void AttackAction()
     {
-        Debug.Log("Found Kaguya !");
+        presenter.GamePreClearEvent.Invoke();
+
+        var animator = GetComponent<Animator>();
+        animator.SetTrigger("Break");
+
+        Observable.Timer(TimeSpan.FromMilliseconds(DelayTime))
+            .Subscribe(_ =>
+            {
+                presenter.GameClearEvent.Invoke();
+
+                Destroy(transform.parent.gameObject);
+            }).AddTo(this);
     }
 
     public override int CalcScore(int current)

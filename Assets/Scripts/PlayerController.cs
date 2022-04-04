@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
             if (hitBamboo.TryGetComponent<GenericBamboo>(out var genericBamboo))
             {
                 AttackBambooLogic(genericBamboo);
+                hitBamboo.enabled = false;
             }
         }
     }

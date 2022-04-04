@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.Events;
 
 public class InGameViewPresenter : MonoBehaviour
 {
@@ -38,12 +39,17 @@ public class InGameViewPresenter : MonoBehaviour
     [SerializeField]
     CollectionItem[] testItem;
 
+    public UnityEvent GamePreClearEvent;
+    public UnityEvent GameClearEvent;
+
     public bool PickUpItem(out ItemEntity entity)
     {
         var index = item.PickUp();
         if (index != -1)
         {
             entity = item.GetItem(index);
+            gameView.SetLogWindow(true);
+            gameView.UpdateLogText(PresetText.Rare);
 
             return true;
         }
@@ -122,12 +128,22 @@ public class InGameViewPresenter : MonoBehaviour
         // bambooGenerator.PlacementBamboo();
         item.CreateItemMap();
         score.Init();
+
+        GamePreClearEvent.AddListener(PreClearGame);
+        GameClearEvent.AddListener(FinishedGame);
     }
 
     void InProgressGame()
     {
         CursorManager.OffCursor();
         Time.timeScale = 1;
+    }
+
+    void PreClearGame()
+    {
+        gameView.SetView(false);
+        timer.StopTimer();
+        gameView.PlayParticle();
     }
 
     void FinishedGame()
