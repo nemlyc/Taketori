@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1712,7 +1712,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525498710}
-  m_LocalRotation: {x: 0.06433936, y: 0.000000004300141, z: -2.762705e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433936, y: -0.0000000043001407, z: 2.7627045e-10, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 11, z: -15}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
@@ -2879,7 +2879,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777470091}
-  m_LocalRotation: {x: 0.06433937, y: 0.0000000042926827, z: -2.7676195e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433937, y: -0.000000004292682, z: 2.7676192e-10, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
@@ -3794,6 +3794,12 @@ MonoBehaviour:
   resultViewPresenter: {fileID: 1051698352}
   testItem:
   - {fileID: 11400000, guid: 299483962adbd024894d0283f18e0770, type: 2}
+  GamePreClearEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  GameClearEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1051698352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3884,6 +3890,7 @@ GameObject:
   - component: {fileID: 1069708335}
   - component: {fileID: 1069708334}
   - component: {fileID: 1069708339}
+  - component: {fileID: 1069708340}
   m_Layer: 6
   m_Name: bamboo
   m_TagString: Untagged
@@ -3996,6 +4003,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a13839181b9f344bbbaabb29f285f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1069708340
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069708333}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1141641031
 GameObject:
   m_ObjectHideFlags: 0
@@ -4254,7 +4280,6 @@ GameObject:
   - component: {fileID: 1395018368}
   - component: {fileID: 1395018367}
   - component: {fileID: 1395018366}
-  - component: {fileID: 1395018370}
   m_Layer: 0
   m_Name: SpecilAttackpoint1
   m_TagString: Untagged
@@ -4318,18 +4343,6 @@ Transform:
   m_Father: {fileID: 419792256}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1395018370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395018365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a13839181b9f344bbbaabb29f285f80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1400903383
 GameObject:
   m_ObjectHideFlags: 0
@@ -4556,6 +4569,8 @@ MonoBehaviour:
   timerValue: {fileID: 966362840}
   readyTimeValue: {fileID: 722811081}
   fader: {fileID: 1556101869}
+  statusCanvas: {fileID: 0}
+  clearParticle: {fileID: 0}
 --- !u!114 &1406358238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4871,7 +4886,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544640537}
-  m_LocalRotation: {x: 0.04622492, y: 0.0000000021484983, z: -9.9420444e-11, w: 0.99893105}
+  m_LocalRotation: {x: 0.04622492, y: -0.000000002148499, z: 9.942047e-11, w: 0.99893105}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
