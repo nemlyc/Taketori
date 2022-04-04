@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class InGameView : MonoBehaviour
 {
     [SerializeField]
-    TMP_Text ageValue, scoreValue, timerValue, readyTimeValue;
+    TMP_Text ageValue, scoreValue, timerValue, readyTimeValue, logText;
     [SerializeField]
     CanvasFader fader;
     [SerializeField]
-    GameObject statusCanvas;
+    GameObject statusCanvas, resultCanvas, playerCanvas, logCanvas;
+
     [SerializeField]
     ParticleSystem clearParticle;
 
@@ -38,6 +39,11 @@ public class InGameView : MonoBehaviour
         readyTimeValue.text = time;
     }
 
+    public void UpdateLogText(string text)
+    {
+        logText.text += text;
+    }
+
     public void PlayParticle()
     {
         clearParticle.Play();
@@ -51,11 +57,25 @@ public class InGameView : MonoBehaviour
     public void SetView(bool isVisible)
     {
         statusCanvas.SetActive(isVisible);
+        SetLogWindow(isVisible);
+        SetPlayerWindow(isVisible);
+    }
+
+    public void SetLogWindow(bool isVisible)
+    {
+        logCanvas.SetActive(isVisible);
+    }
+
+    public void SetPlayerWindow(bool isVisible)
+    {
+        playerCanvas.SetActive(isVisible);
     }
 
     private void Start()
     {
         fader.DoFadeIn(fadeTime);
+
+        SetLogWindow(false);
     }
 
     private void Reset()

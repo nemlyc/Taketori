@@ -48,6 +48,8 @@ public class InGameViewPresenter : MonoBehaviour
         if (index != -1)
         {
             entity = item.GetItem(index);
+            gameView.SetLogWindow(true);
+            gameView.UpdateLogText(PresetText.Rare);
 
             return true;
         }
