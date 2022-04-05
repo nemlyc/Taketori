@@ -29,6 +29,8 @@ public class InGameViewPresenter : MonoBehaviour
     [SerializeField]
     BambooGenerator bambooGenerator;
     [SerializeField]
+    MoonController moon;
+    [SerializeField]
     ItemManager item;
     [SerializeField]
     float readyTime = 4, ingameTime = 300;
@@ -37,10 +39,11 @@ public class InGameViewPresenter : MonoBehaviour
     ResultViewPresenter resultViewPresenter;
 
     [SerializeField]
-    CollectionItem[] testItem;
+    AudioPlayer audioPlayer;
 
     public UnityEvent GamePreClearEvent;
     public UnityEvent GameClearEvent;
+
 
     public bool PickUpItem(out ItemEntity entity)
     {
@@ -125,7 +128,10 @@ public class InGameViewPresenter : MonoBehaviour
          * - 竹の切り替え
          * - 月の配置
          */
-        // bambooGenerator.PlacementBamboo();
+        Time.timeScale = 0;
+
+        bambooGenerator.PlacementBamboo();
+        moon.InitializeMoon();
         item.CreateItemMap();
         score.Init();
 
@@ -137,10 +143,14 @@ public class InGameViewPresenter : MonoBehaviour
     {
         CursorManager.OffCursor();
         Time.timeScale = 1;
+
+        audioPlayer.PlayBGMFromMap(AudioInfo.InGameBGM);
     }
 
     void PreClearGame()
     {
+        audioPlayer.StopBGM();
+
         gameView.SetView(false);
         timer.StopTimer();
         gameView.PlayParticle();
@@ -151,6 +161,7 @@ public class InGameViewPresenter : MonoBehaviour
         Debug.Log("Game Stop");
         CursorManager.OnCursor();
         Time.timeScale = 0;
+        audioPlayer.PlayBGMFromMap(AudioInfo.ResultBGM);
 
         SaveHighScore(score.currentEntity);
         SaveItemProgress(score.currentEntity.itemEntities);
@@ -173,20 +184,4 @@ public class InGameViewPresenter : MonoBehaviour
         PlayerDataManager.WriteProgressData(items);
     }
     #endregion
-
-    void TestScore()
-    {
-        score.AddBamboo(BambooInfo.BambooType.Normal);
-        score.AddBamboo(BambooInfo.BambooType.Normal);
-        score.AddBamboo(BambooInfo.BambooType.Shine);
-        score.AddBamboo(BambooInfo.BambooType.Normal);
-        score.AddBamboo(BambooInfo.BambooType.Kaguya);
-        foreach (var i in testItem)
-        {
-            var ent = new ItemEntity();
-            ent.ID = i.GetID();
-            ent.IsGot = true;
-            score.AddItem(ent);
-        }
-    }
 }

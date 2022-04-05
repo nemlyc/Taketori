@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     InGameViewPresenter presenter;
+    [SerializeField]
+    AudioPlayer audioPlayer;
 
     public float speed = 10.0f;
     public float gravity = 9.81f;
@@ -29,12 +31,15 @@ public class PlayerController : MonoBehaviour
 
     public void AttackBambooLogic(GenericBamboo hitBamboo)
     {
-        scoremanager.AddBamboo(hitBamboo.GetBambooType());
+        var type = hitBamboo.GetBambooType();
+        scoremanager.AddBamboo(type);
+        audioPlayer.PlayBambooSE(type);
 
         var isGot = presenter.PickUpItem(out var itemEntity);
         if (isGot)
         {
             scoremanager.AddItem(itemEntity);
+            audioPlayer.PlayOneShot(AudioInfo.GetItem);
         }
         hitBamboo.AttackAction();
     }
@@ -52,12 +57,8 @@ public class PlayerController : MonoBehaviour
         specilattackpoints[equipment].SetActive(true);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Movement();
-        LookForward();
-
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             ChangeSpecialAttack();
@@ -73,7 +74,10 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(speed < 30) speed = preage - currentAge.Value + speed;
+        Movement();
+        LookForward();
+
+        if (speed < 30) speed = preage - currentAge.Value + speed;
         Age();
     }
 
@@ -111,6 +115,8 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
+        audioPlayer.PlayOneShot(AudioInfo.NormalAttack);
+
         Collider[] hitBamboos = Physics.OverlapSphere(attackPoint.position, attackRadius, bamboolayer);
         foreach(Collider hitBamboo in hitBamboos)
         {
@@ -124,7 +130,9 @@ public class PlayerController : MonoBehaviour
 
     void SpecialAttack()
     {
-        foreach(GameObject specilattackpoint in specilattackpoints)
+        audioPlayer.PlayOneShot(AudioInfo.SpecialAttack);
+
+        foreach (GameObject specilattackpoint in specilattackpoints)
         {
             if(specilattackpoint.activeSelf)
             {

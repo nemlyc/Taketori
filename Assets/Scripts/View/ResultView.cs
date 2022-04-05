@@ -20,6 +20,8 @@ public class ResultView : MonoBehaviour
     [SerializeField]
     CollectionItem[] itemList;
     Dictionary<string, CollectionItem> itemDictionary;
+    [SerializeField]
+    AudioPlayer audioPlayer;
 
     public void UpdateNums(ScoreEntity entity)
     {
@@ -43,10 +45,14 @@ public class ResultView : MonoBehaviour
     {
         closeButton.onClick.AddListener(() =>
         {
+            audioPlayer.PlayOneShot(AudioInfo.UIClick);
+
             presenter.ToHomeScene();
         });
         retryButton.onClick.AddListener(() =>
         {
+            audioPlayer.PlayOneShot(AudioInfo.UIClick);
+
             presenter.Retry();
         });
 

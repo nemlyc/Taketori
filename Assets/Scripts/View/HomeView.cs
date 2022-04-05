@@ -38,6 +38,9 @@ public class HomeView : MonoBehaviour
     [SerializeField]
     List<CollectionItemViewComponent> itemList;
 
+    [SerializeField]
+    AudioPlayer audioPlayer;
+
     readonly float fadeTime = 0.5f;
 
     public void UpdateScore(int score)
@@ -90,6 +93,8 @@ public class HomeView : MonoBehaviour
     {
         startButton.OnClickAsObservable().Subscribe(_ =>
         {
+            audioPlayer.PlayOneShot(AudioInfo.UIClick);
+
             fader.DoFadeOut(fadeTime);
             var a = SceneManager.LoadSceneAsync(ViewInfo.InGameView);
             a.allowSceneActivation = false;
@@ -100,6 +105,8 @@ public class HomeView : MonoBehaviour
 
         collectionButton.OnClickAsObservable().Subscribe(_ =>
         {
+            audioPlayer.PlayOneShot(AudioInfo.UIClick);
+
             collectionView.ShowCollectionCanvas(true);
         }).AddTo(this);
     }
