@@ -12,6 +12,9 @@ public class HomeViewPresenter : MonoBehaviour
 
     Dictionary<string, CollectionItem> itemInfoMap = new Dictionary<string, CollectionItem>();
 
+    [SerializeField]
+    AudioPlayer audioPlayer;
+
     public Dictionary<string, CollectionItem> GetItemMap()
     {
         return itemInfoMap;
@@ -24,7 +27,11 @@ public class HomeViewPresenter : MonoBehaviour
 
         LoadProgressData();
         LoadScoreData();
+    }
 
+    private void Start()
+    {
+        audioPlayer.PlayBGMFromMap(AudioInfo.HomeBGM);
     }
 
     void LoadProgressData()

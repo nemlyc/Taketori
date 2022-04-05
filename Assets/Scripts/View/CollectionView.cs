@@ -21,10 +21,15 @@ public class CollectionView : MonoBehaviour
     [SerializeField]
     CollectionViewPresenter collectionViewPresenter;
 
+    [SerializeField]
+    AudioPlayer audioPlayer;
+
     private void Start()
     {
         backButton.OnClickAsObservable().Subscribe(_ =>
         {
+            audioPlayer.PlayOneShot(AudioInfo.UIClick);
+
             ShowCollectionCanvas(false);
         }).AddTo(this);
     }
