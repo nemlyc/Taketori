@@ -3151,7 +3151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uFF082020/20/20 20:20\uFF09"
+  m_text: "\uFF08\u30B9\u30B3\u30A2\u306A\u3057\uFF09"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06353a91c569c2a43a629aa5f070acd2, type: 2}
   m_sharedMaterial: {fileID: -5584412863871627711, guid: 06353a91c569c2a43a629aa5f070acd2, type: 2}
@@ -5545,7 +5545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100%
+  m_text: 0%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06353a91c569c2a43a629aa5f070acd2, type: 2}
   m_sharedMaterial: {fileID: -5584412863871627711, guid: 06353a91c569c2a43a629aa5f070acd2, type: 2}
@@ -7090,7 +7090,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 123456789
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06353a91c569c2a43a629aa5f070acd2, type: 2}
   m_sharedMaterial: {fileID: -5584412863871627711, guid: 06353a91c569c2a43a629aa5f070acd2, type: 2}
@@ -7813,7 +7813,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 460180287}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
