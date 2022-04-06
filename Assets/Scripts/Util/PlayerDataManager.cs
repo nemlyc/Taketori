@@ -43,6 +43,13 @@ public static class PlayerDataManager
     {
         LoadProgressData(out var currentProgress);
 
+        if (currentProgress == null)
+        {
+            var initData = JsonManager.GenerateJsonObject<List<ItemEntity>>(newProgress);
+            JsonManager.WriteJsonData(ProgressDataPath, initData);
+            return;
+        }
+
         var progressDictionary = new Dictionary<string, bool>();
         foreach (var item in currentProgress)
         {
