@@ -53,6 +53,10 @@ public class HomeViewPresenter : MonoBehaviour
             int value = Mathf.FloorToInt(got / size * 100);
             homeView.UpdateRateValue(value);
         }
+        else
+        {
+            CreateMasterData();
+        }
     }
 
     void LoadScoreData()
@@ -75,6 +79,21 @@ public class HomeViewPresenter : MonoBehaviour
         {
             itemInfoMap.Add(item.GetID(), item);
         }
+    }
+
+    void CreateMasterData()
+    {
+        var list = new List<ItemEntity>();
+        foreach (var item in ItemTemplate)
+        {
+            var entity = new ItemEntity()
+            {
+                ID = item.GetID(),
+                IsGot = false
+            };
+            list.Add(entity);
+        }
+        PlayerDataManager.WriteProgressData(list);
     }
 
     void TestItemProgress()

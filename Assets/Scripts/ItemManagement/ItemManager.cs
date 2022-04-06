@@ -19,6 +19,11 @@ public class ItemManager : MonoBehaviour
     public void CreateItemMap()
     {
         PlayerDataManager.LoadProgressData(out var data);
+        if (data == null)
+        {
+            Debug.LogError("Homeシーンを一度実行してください（アイテム出現なし）。");
+            return;
+        }
         foreach (var item in data)
         {
             itemMap.Add(item.ID, item);
