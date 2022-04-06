@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     InGameViewPresenter presenter;
     [SerializeField]
     AudioPlayer audioPlayer;
+    [SerializeField]
+    Animator animator;
 
     public float speed = 10.0f;
     public float gravity = 9.81f;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
     Transform mainCamera;
 
     CharacterController controller;
+    PlayerAnimationController animationController;
 
     public void AttackBambooLogic(GenericBamboo hitBamboo)
     {
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         currentAge.Value = preage;
         controller = GetComponent<CharacterController>();
+        animationController = new PlayerAnimationController(animator);
         equipment = 0;
         foreach(GameObject specilattackpoint in specilattackpoints)
         {
@@ -101,6 +105,11 @@ public class PlayerController : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+
+        if (moveDirection.sqrMagnitude > 0.1)
+        {
+            animationController.Move();
+        }
     }
     void LookForward()
     {
@@ -116,6 +125,7 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         audioPlayer.PlayOneShot(AudioInfo.NormalAttack);
+        animationController.Attack();
 
         Collider[] hitBamboos = Physics.OverlapSphere(attackPoint.position, attackRadius, bamboolayer);
         foreach(Collider hitBamboo in hitBamboos)
@@ -131,6 +141,7 @@ public class PlayerController : MonoBehaviour
     void SpecialAttack()
     {
         audioPlayer.PlayOneShot(AudioInfo.SpecialAttack);
+        animationController.Attack();
 
         foreach (GameObject specilattackpoint in specilattackpoints)
         {
@@ -166,5 +177,10 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+    }
+
+    private void Reset()
+    {
+        animator = GetComponentInChildren<Animator>();
     }
 }
