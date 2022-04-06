@@ -50,7 +50,7 @@ public class InGameViewPresenter : MonoBehaviour
         var index = item.PickUp();
         if (index != -1)
         {
-            entity = item.GetItem(index);
+            entity = item.GetAndRemoveItem(index);
             gameView.SetLogWindow(true);
             gameView.UpdateLogText(PresetText.Rare);
 
