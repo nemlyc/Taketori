@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     AudioPlayer audioPlayer;
     [SerializeField]
     Animator animator;
+    [SerializeField]
+    TrailRenderer swordTrail;
 
     public float speed = 10.0f;
     public float gravity = 9.81f;
@@ -31,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     CharacterController controller;
     PlayerAnimationController animationController;
+
+    readonly int UpperLayer = 1;
+    readonly float animationEndTime = 0.5f;
 
     public void AttackBambooLogic(GenericBamboo hitBamboo)
     {
@@ -74,6 +79,15 @@ public class PlayerController : MonoBehaviour
         else if(Input.GetMouseButtonDown(1))
         {
             SpecialAttack();
+        }
+
+        if (animationController.GetAnimState(UpperLayer) < animationEndTime)
+        {
+            swordTrail.emitting = true;
+        }
+        else
+        {
+            swordTrail.emitting = false;
         }
     }
     void FixedUpdate()

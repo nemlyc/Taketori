@@ -33,6 +33,11 @@ public class PlayerAnimationController
         animator.Play(State.Attack.ToString(), UpperLayer, StartTime);
     }
 
+    public float GetAnimState(int layer)
+    {
+        return animator.GetCurrentAnimatorStateInfo(layer).normalizedTime;
+    }
+
     public void Move()
     {
         animator.Play(State.Run.ToString());
