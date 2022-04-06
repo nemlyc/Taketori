@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9864f5006b36f1d4a8c86455bb1b1898, type: 3}
-  m_Name: Item7
+  m_Name: Item2
   m_EditorClassIdentifier: 
-  ID: 5388ab72-f9d6-467f-b2b4-78ac4da3dab7
-  itemName: "\u30A2\u30A4\u30C6\u30E07"
-  sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  ID: 4afe442d-e07d-48bc-b6f0-712b02768cc1
+  itemName: "\u3057\u3057\u304A\u3069\u3057"
+  sprite: {fileID: -3107407490654115046, guid: e7bb6cc75cf5d1a4081b936687a6102d, type: 3}
