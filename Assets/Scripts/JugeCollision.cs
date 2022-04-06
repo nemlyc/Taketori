@@ -13,8 +13,9 @@ public class JugeCollision : MonoBehaviour
         {
             if (other.gameObject.TryGetComponent<GenericBamboo>(out var genericBamboo))
             {
+                other.enabled = false;
                 player.AttackBambooLogic(genericBamboo);
-                Debug.Log(other.gameObject.name);
+                //Debug.Log(other.gameObject.name);
             };
         }
     }

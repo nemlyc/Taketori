@@ -11,7 +11,7 @@ public class ItemManager : MonoBehaviour
 
     List<ItemEntity> unownedList = new List<ItemEntity>();
 
-    readonly float probability = 5f; // => %
+    readonly float probability = 2.5f; // => %
     readonly float Min = 0f;
     readonly float Max = 10001f;
     readonly float Percent = 100;
@@ -26,9 +26,11 @@ public class ItemManager : MonoBehaviour
         CreateUnownedList();
     }
 
-    public ItemEntity GetItem(int index)
+    public ItemEntity GetAndRemoveItem(int index)
     {
-        return unownedList[index];
+        var entity = unownedList[index];
+        unownedList.Remove(entity);
+        return entity;
     }
 
     public int PickUp()
@@ -42,7 +44,8 @@ public class ItemManager : MonoBehaviour
         var value = Random.Range(Min, Max);
         if (unownedList.Count > 0 && value <= probability * Percent)
         {
-            return Random.Range((int)Min, unownedList.Count);
+            var pickupedIndex = Random.Range((int)Min, unownedList.Count);
+            return pickupedIndex;
         }
         else
         {

@@ -97,10 +97,6 @@ public class HomeView : MonoBehaviour
 
             fader.DoFadeOut(fadeTime);
             var a = SceneManager.LoadSceneAsync(ViewInfo.InGameView);
-            a.allowSceneActivation = false;
-
-            Observable.Timer(TimeSpan.FromSeconds(fadeTime))
-                .Subscribe(_ => ExecuteSceneChange(a)).AddTo(this);
         }).AddTo(this);
 
         collectionButton.OnClickAsObservable().Subscribe(_ =>
@@ -109,11 +105,6 @@ public class HomeView : MonoBehaviour
 
             collectionView.ShowCollectionCanvas(true);
         }).AddTo(this);
-    }
-
-    void ExecuteSceneChange(AsyncOperation a)
-    {
-        a.allowSceneActivation = true;
     }
 
     string AppendPresetText(int num, string presetText)

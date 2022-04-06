@@ -39,5 +39,7 @@ public class CollectionItemViewComponent : MonoBehaviour
         ID = item.GetID();
         gameObject.name = ID;
         UpdateName();
+
+        itemImage.sprite = item.sprite;
     }
 }
