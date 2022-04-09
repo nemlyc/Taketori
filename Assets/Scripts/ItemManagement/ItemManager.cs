@@ -68,6 +68,7 @@ public class ItemManager : MonoBehaviour
                 unownedList.Add(itemMap[id]);
             }
         }
+        Debug.Log($"Unowned list created : {unownedList.Count}");
     }
 
 }
