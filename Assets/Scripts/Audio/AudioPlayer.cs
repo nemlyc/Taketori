@@ -71,6 +71,7 @@ public class AudioPlayer : MonoBehaviour
     {
         bgmSource.volume = BGMVolume;
         seSource.volume = MasterVolume;
+        bgmSource.loop = true;
     }
 
     private void Reset()
