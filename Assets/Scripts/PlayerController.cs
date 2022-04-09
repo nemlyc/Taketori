@@ -96,8 +96,11 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Movement();
-        LookForward();
+        if (presenter.isInGame)
+        {
+            Movement();
+            LookForward();
+        }
 
         if (speed < MaxSpeed)
         {

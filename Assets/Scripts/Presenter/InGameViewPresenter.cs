@@ -43,7 +43,7 @@ public class InGameViewPresenter : MonoBehaviour
 
     public UnityEvent GamePreClearEvent;
     public UnityEvent GameClearEvent;
-
+    public bool isInGame { get; private set; } = false;
 
     public bool PickUpItem(out ItemEntity entity)
     {
@@ -84,6 +84,7 @@ public class InGameViewPresenter : MonoBehaviour
             {
                 gameView.ToggleReadyTime(false);
                 timer.StartTimer(ingameTime);
+                isInGame = true;
                 Destroy(localTimer);
             }
             else
@@ -161,6 +162,7 @@ public class InGameViewPresenter : MonoBehaviour
         Debug.Log("Game Stop");
         CursorManager.OnCursor();
         Time.timeScale = 0;
+        isInGame = false;
         audioPlayer.PlayBGMFromMap(AudioInfo.ResultBGM);
 
         SaveHighScore(score.currentEntity);
