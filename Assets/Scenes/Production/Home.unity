@@ -3310,8 +3310,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 81515302}
   m_HandleRect: {fileID: 81515301}
   m_Direction: 0
-  m_Value: -0.00000031976506
-  m_Size: 0.32133332
+  m_Value: -0.00000031976512
+  m_Size: 0.32133338
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4784,7 +4784,7 @@ MonoBehaviour:
   SpecialAttack: {fileID: 8300000, guid: 5bd9f46bb066b684e95543b5e396ce12, type: 3}
   HitNormal: {fileID: 8300000, guid: 594aca113e1ca83439960cb48a1b90c5, type: 3}
   HitKaguya: {fileID: 8300000, guid: cb99a026640ea054f9562e03656d6664, type: 3}
-  GetItem: {fileID: 0}
+  GetItem: {fileID: 8300000, guid: cb99a026640ea054f9562e03656d6664, type: 3}
   UIClick: {fileID: 8300000, guid: 892a655aa81075a45aa274054829d254, type: 3}
 --- !u!114 &1281627278
 MonoBehaviour:
@@ -7813,7 +7813,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 460180287}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
