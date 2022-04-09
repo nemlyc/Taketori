@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 public class InGameView : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class InGameView : MonoBehaviour
     ParticleSystem clearParticle;
 
     readonly float fadeTime = 0.5f;
+    readonly int logTime = 3000;
     //GameViewPresenter presenter;
 
     public void UpdateAgeValue(int age)
@@ -61,9 +63,18 @@ public class InGameView : MonoBehaviour
         SetPlayerWindow(isVisible);
     }
 
-    public void SetLogWindow(bool isVisible)
+    public async void SetLogWindow(bool isVisible)
     {
         logCanvas.SetActive(isVisible);
+
+        if (isVisible)
+        {
+            logText.text = "";
+
+            await UniTask.Delay(logTime);
+
+            logCanvas.SetActive(false);
+        }
     }
 
     public void SetPlayerWindow(bool isVisible)
