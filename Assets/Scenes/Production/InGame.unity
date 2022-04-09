@@ -638,6 +638,14 @@ PrefabInstance:
       value: -0.0005
       objectReference: {fileID: 0}
     - target: {fileID: 2499122479479111939, guid: 055a9a5213057ea44a685da2f46ed230, type: 3}
+      propertyPath: speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499122479479111939, guid: 055a9a5213057ea44a685da2f46ed230, type: 3}
+      propertyPath: preage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499122479479111939, guid: 055a9a5213057ea44a685da2f46ed230, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 81090954}
@@ -653,6 +661,10 @@ PrefabInstance:
       propertyPath: audioPlayer
       value: 
       objectReference: {fileID: 1665510591}
+    - target: {fileID: 2499122479479111939, guid: 055a9a5213057ea44a685da2f46ed230, type: 3}
+      propertyPath: attackRadius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2499122479479111939, guid: 055a9a5213057ea44a685da2f46ed230, type: 3}
       propertyPath: scoremanager
       value: 
