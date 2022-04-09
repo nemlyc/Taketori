@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 15.0f;
     public float gravity = 9.81f;
-    public float preage = 1000;
+    public float preage = 100;
     public ReactiveProperty<float> currentAge = new ReactiveProperty<float>();
     public Transform attackPoint;
     public float attackRadius;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     readonly int UpperLayer = 1;
     readonly float animationEndTime = 0.5f;
-    readonly float InitAge = 1000;
+    readonly float InitAge = 100;
     readonly float AgeStep = 10;
     readonly float MaxSpeed = 30;
     readonly float MinAge = 20;
