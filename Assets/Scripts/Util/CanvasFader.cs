@@ -57,15 +57,6 @@ public class CanvasFader : MonoBehaviour
                 fadePanel.color += new Color(0, 0, 0, Mathf.Clamp01(Time.deltaTime / currentDuration));
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DoFadeIn(1.5f);
-        }
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            DoFadeOut(1.5f);
-        }
     }
 
     private void Awake()
