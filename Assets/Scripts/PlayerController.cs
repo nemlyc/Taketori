@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     TrailRenderer swordTrail;
 
-    public float speed = 10.0f;
+    public float speed = 15.0f;
     public float gravity = 9.81f;
     public float preage = 1000;
     public ReactiveProperty<float> currentAge = new ReactiveProperty<float>();
@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     readonly float animationEndTime = 0.5f;
     readonly float InitAge = 1000;
     readonly float AgeStep = 10;
+    readonly float MaxSpeed = 30;
+    readonly float MinAge = 20;
 
     public void AttackBambooLogic(GenericBamboo hitBamboo)
     {
@@ -97,7 +99,7 @@ public class PlayerController : MonoBehaviour
         Movement();
         LookForward();
 
-        if (speed < 30)
+        if (speed < MaxSpeed)
         {
             speed = preage - currentAge.Value + speed;
             preage = currentAge.Value;
@@ -107,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
     void Age()
     {
-        if (currentAge.Value > 20)
+        if (currentAge.Value > MinAge)
         {
             int sumbamboo = scoremanager.currentEntity.KaguyaNum + scoremanager.currentEntity.NormalNum + scoremanager.currentEntity.ShineNum;
             currentAge.Value = InitAge - sumbamboo / AgeStep;
