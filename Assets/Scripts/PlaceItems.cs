@@ -10,9 +10,7 @@ public class PlaceItems : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        terrain = GameObject.Find("Terrain").GetComponent<Terrain>();
-        
+    {        
         for(int i = 0; i < itemcount; i++)
         {
             float x = Random.Range(0, terrain.terrainData.size.x);
