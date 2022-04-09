@@ -23,7 +23,6 @@ public class HomeViewPresenter : MonoBehaviour
     private void Awake()
     {
         CreateItemMap();
-        //TestItemProgress();
 
         LoadProgressData();
         LoadScoreData();
@@ -92,19 +91,6 @@ public class HomeViewPresenter : MonoBehaviour
                 IsGot = false
             };
             list.Add(entity);
-        }
-        PlayerDataManager.WriteProgressData(list);
-    }
-
-    void TestItemProgress()
-    {
-        var list = new List<ItemEntity>();
-        foreach (var item in ItemTemplate)
-        {
-            var ent = new ItemEntity();
-            ent.ID = item.GetID();
-            ent.IsGot = Random.Range(0, 2) == 0;
-            list.Add(ent);
         }
         PlayerDataManager.WriteProgressData(list);
     }

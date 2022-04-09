@@ -18,13 +18,15 @@ public class HomeView : MonoBehaviour
     TMP_Text dateValue;
 
     [SerializeField]
-    Button startButton, collectionButton;
+    Button startButton, collectionButton, licenseButton;
 
     [SerializeField]
     CanvasFader fader;
 
     [SerializeField]
     CollectionView collectionView;
+    [SerializeField]
+    LicenseView licenseView;
 
     [SerializeField]
     GameObject gotItemRoot;
@@ -105,6 +107,13 @@ public class HomeView : MonoBehaviour
 
             collectionView.ShowCollectionCanvas(true);
         }).AddTo(this);
+
+        licenseButton.OnClickAsObservable().Subscribe(_ =>
+        {
+            audioPlayer.PlayOneShot(AudioInfo.UIClick);
+
+            licenseView.ShowLicenseView(true);
+        });
     }
 
     string AppendPresetText(int num, string presetText)
