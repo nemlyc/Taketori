@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
 
     readonly int UpperLayer = 1;
     readonly float animationEndTime = 0.5f;
+    readonly float InitAge = 1000;
+    readonly float AgeStep = 10;
 
     public void AttackBambooLogic(GenericBamboo hitBamboo)
     {
@@ -95,7 +97,11 @@ public class PlayerController : MonoBehaviour
         Movement();
         LookForward();
 
-        if (speed < 30) speed = preage - currentAge.Value + speed;
+        if (speed < 30)
+        {
+            speed = preage - currentAge.Value + speed;
+            preage = currentAge.Value;
+        };
         Age();
     }
 
@@ -104,7 +110,7 @@ public class PlayerController : MonoBehaviour
         if (currentAge.Value > 20)
         {
             int sumbamboo = scoremanager.currentEntity.KaguyaNum + scoremanager.currentEntity.NormalNum + scoremanager.currentEntity.ShineNum;
-            currentAge.Value = preage - sumbamboo / 10;
+            currentAge.Value = InitAge - sumbamboo / AgeStep;
         }
     }
 
