@@ -23,14 +23,14 @@ public class HomeViewPresenter : MonoBehaviour
     private void Awake()
     {
         CreateItemMap();
-
-        LoadProgressData();
-        LoadScoreData();
     }
 
     private void Start()
     {
         audioPlayer.PlayBGMFromMap(AudioInfo.HomeBGM);
+
+        LoadProgressData();
+        LoadScoreData();
     }
 
     void LoadProgressData()
@@ -40,7 +40,7 @@ public class HomeViewPresenter : MonoBehaviour
             float size = items.Count;
             float got = 0;
             foreach (var item in items)
-            {                
+            {
                 homeView.UpdateStatus(item);
                 if (item.IsGot)
                 {
