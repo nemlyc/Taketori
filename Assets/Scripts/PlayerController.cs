@@ -96,8 +96,11 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Movement();
-        LookForward();
+        if (presenter.isInGame)
+        {
+            Movement();
+            LookForward();
+        }
 
         if (speed < MaxSpeed)
         {
@@ -121,6 +124,7 @@ public class PlayerController : MonoBehaviour
         if(controller.isGrounded)
         {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = moveDirection.normalized;
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
         }

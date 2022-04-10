@@ -80,7 +80,7 @@ public class HomeView : MonoBehaviour
 
     public void UpdateStatus(ItemEntity entity)
     {
-        var item = itemList.Find(x => x.gameObject.name.Equals(entity.ID));
+        var item = itemList.Find(x => x.GetComponent<CollectionItemViewComponent>().ID.Equals(entity.ID));
         if (item)
         {
             item.UpdateStatus(entity.ID, entity.IsGot);
